@@ -3,7 +3,43 @@
 {% block title %}Главная страница - Auth Test HW{% endblock %}
 
 {% block content %}
-<h1>Добро пожаловать на главную страницу!</h1>
-<p>Это главная страница приложения.</p>
+<div class="hero">
+    <h1>Добро пожаловать!</h1>
+    <p>Система аутентификации и управления пользователями</p>
+</div>
+
+<div class="features">
+    <div class="feature-card">
+        <h3>🔐 Безопасность</h3>
+        <p>Надежная система аутентификации с защитой паролей</p>
+    </div>
+    <div class="feature-card">
+        <h3>👤 Профиль</h3>
+        <p>Управление личными данными и настройками аккаунта</p>
+    </div>
+    <div class="feature-card">
+        <h3>📱 Удобство</h3>
+        <p>Простой и интуитивный интерфейс для всех пользователей</p>
+    </div>
+</div>
+
+{% if not user.is_authenticated %}
+<div class="text-center mt-2" style="margin-top: 3rem;">
+    <p style="font-size: 1.1rem; color: #666; margin-bottom: 1rem;">
+        Начните работу прямо сейчас
+    </p>
+    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+        <a href="{% url 'register' %}" class="btn" style="display: inline-block; width: auto; padding: 0.75rem 2rem; text-decoration: none;">Регистрация</a>
+        <a href="{% url 'login' %}" class="btn" style="display: inline-block; width: auto; padding: 0.75rem 2rem; text-decoration: none; background: rgba(255, 255, 255, 0.2); border: 2px solid white;">Вход</a>
+    </div>
+</div>
+{% else %}
+<div class="text-center mt-2" style="margin-top: 3rem;">
+    <p style="font-size: 1.1rem; color: #666; margin-bottom: 1rem;">
+        Добро пожаловать, {{ user.username }}!
+    </p>
+    <a href="{% url 'profile' %}" class="btn" style="display: inline-block; width: auto; padding: 0.75rem 2rem; text-decoration: none;">Перейти в профиль</a>
+</div>
+{% endif %}
 {% endblock %}
 

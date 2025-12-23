@@ -4,10 +4,27 @@
 
 {% block content %}
 <h1>Вход в систему</h1>
+<p class="text-center" style="color: #666; margin-bottom: 2rem;">Войдите в свой аккаунт</p>
 <form method="post">
     {% csrf_token %}
-    {{ form.as_p }}
+    {% for field in form %}
+        <div class="form-group">
+            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+            {{ field }}
+            {% if field.help_text %}
+                <span class="helptext">{{ field.help_text }}</span>
+            {% endif %}
+            {% if field.errors %}
+                <ul class="errorlist">
+                    {% for error in field.errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+    {% endfor %}
     <button type="submit">Войти</button>
 </form>
+<p class="text-center mt-2">Нет аккаунта? <a href="{% url 'register' %}">Зарегистрироваться</a></p>
 {% endblock %}
 

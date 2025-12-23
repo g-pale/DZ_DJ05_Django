@@ -4,8 +4,23 @@
 
 {% block content %}
 <h1>Профиль пользователя</h1>
-<p>Имя пользователя: {{ user.username }}</p>
-<p>Email: {{ user.email|default:"Не указан" }}</p>
-<p>Номер телефона: {{ user.phone_number|default:"Не указан" }}</p>
+<div class="profile-info">
+    <p>
+        <strong>Имя пользователя:</strong>
+        <span>{{ user.username }}</span>
+    </p>
+    <p>
+        <strong>Email:</strong>
+        <span>{{ user.email|default:"Не указан" }}</span>
+    </p>
+    <p>
+        <strong>Номер телефона:</strong>
+        <span>{{ user.phone_number|default:"Не указан" }}</span>
+    </p>
+    <p>
+        <strong>Дата регистрации:</strong>
+        <span>{{ user.date_joined|date:"d.m.Y H:i" }}</span>
+    </p>
+</div>
 {% endblock %}
 
